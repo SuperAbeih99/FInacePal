@@ -1,0 +1,13 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dollar Sign -->
+  <path d="M16 2C8.268 2 2 8.268 2 16s6.268 14 14 14 14-6.268 14-14S23.732 2 16 2z" fill="#10B981"/>
+  <path d="M16 6v20M12 10h8M12 14h8M12 18h8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Chart Lines -->
+  <path d="M8 20l3-3 2 2 3-3 4 4" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Coins -->
+  <circle cx="24" cy="8" r="2" fill="#EF4444"/>
+  <circle cx="26" cy="10" r="1.5" fill="#8B5CF6"/>
+  <circle cx="22" cy="12" r="1" fill="#06B6D4"/>
+</svg>
