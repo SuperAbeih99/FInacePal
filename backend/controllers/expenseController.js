@@ -1,4 +1,4 @@
-const xlsx = require('xlsx');
+const xlsx = require("xlsx");
 const Expense = require("../models/Expense");
 
 // Add Expense
@@ -62,12 +62,20 @@ exports.downloadExpenseExcel = async (req, res) => {
       Amount: item.amount,
       Date: item.date,
     }));
-    
+
     const wb = xlsx.utils.book_new();
     const ws = xlsx.utils.json_to_sheet(data);
     xlsx.utils.book_append_sheet(wb, ws, "Expense");
-    xlsx.writeFile(wb, 'expense_details.xlsx');
-    res.download('expense_details.xlsx');
+    const buffer = xlsx.write(wb, { bookType: "xlsx", type: "buffer" });
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+    res.setHeader(
+      "Content-Disposition",
+      'attachment; filename="expense_details.xlsx"'
+    );
+    res.send(buffer);
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
   }

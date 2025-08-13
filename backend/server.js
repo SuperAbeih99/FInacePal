@@ -13,9 +13,9 @@ const app = express();
 // Middleware to handle CORS
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "*", 
+    origin: process.env.CLIENT_URL || "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"], 
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
@@ -31,5 +31,10 @@ app.use("/api/v1/dashboard", dashboardRoutes);
 // Serve uploads folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// In Vercel serverless environment, export the app instead of listening on a port
+if (process.env.VERCEL) {
+  module.exports = app;
+} else {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
