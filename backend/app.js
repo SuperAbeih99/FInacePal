@@ -47,6 +47,22 @@ app.get("/health", (req, res) => {
   res.status(200).json({ ok: true });
 });
 
+// Root info route (avoid "Cannot GET /")
+app.get("/", (req, res) => {
+  res.status(200).json({
+    ok: true,
+    name: "FinancePal API",
+    version: "1.0",
+    endpoints: [
+      "/health",
+      "/api/v1/auth",
+      "/api/v1/income",
+      "/api/v1/expense",
+      "/api/v1/dashboard",
+    ],
+  });
+});
+
 // API routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/income", incomeRoutes);
