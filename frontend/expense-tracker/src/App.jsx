@@ -1,58 +1,33 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
 import React from "react";
 import LoginForm from "./pages/Auth/LoginForm";
 import SignUpForm from "./pages/Auth/SignUpForm";
 import UserProvider from "./context/UserContext";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Home from "./pages/Dashboard/Home";
 import Income from "./pages/Dashboard/Income";
 import Expense from "./pages/Dashboard/Expense";
 
+if (typeof window !== "undefined") {
+  // eslint-disable-next-line no-console
+  console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
+}
+
 const App = () => {
   return (
-    <div>
-      <UserProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Root />} />
-            <Route path="/login" exact element={<LoginForm />} />
-            <Route path="/signUp" exact element={<SignUpForm />} />
-            <Route path="/dashboard" exact element={<Home />} />
-            <Route path="/income" exact element={<Income />} />
-            <Route path="/expense" exact element={<Expense />} />
-          </Routes>
-        </Router>
-
-        <Toaster
-          toastOptions={{
-            className: "",
-            style: {
-              fontSize:'13px'
-            },
-          }}
-        />
-        
-      </UserProvider>
-    </div>
-  );
-};
-
-// Define the Root component to handle the initial redirect
-const Root = () => {
-  // Check if token exists in localStorage
-  const isAuthenticated = !!localStorage.getItem("token");
-
-  // Redirect to dashboard if authenticated, otherwise to login
-  return isAuthenticated ? (
-    <Navigate to="/dashboard" />
-  ) : (
-    <Navigate to="/login" />
+    <UserProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/dashboard" element={<Home />} />
+          <Route path="/income" element={<Income />} />
+          <Route path="/expense" element={<Expense />} />
+        </Routes>
+        <Toaster />
+      </Router>
+    </UserProvider>
   );
 };
 

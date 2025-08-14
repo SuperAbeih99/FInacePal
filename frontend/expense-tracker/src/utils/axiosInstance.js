@@ -10,6 +10,9 @@ const axiosInstance = axios.create({
   },
 });
 
+// Include credentials (cookies) for cross-site requests when backend uses cookies
+axiosInstance.defaults.withCredentials = true;
+
 // Request Interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
