@@ -3,6 +3,9 @@
 FinancePal is a full-stack expense tracker built with the **MERN stack** (MongoDB, Express.js, React, Node.js).  
 It allows users to track their expenses, view spending trends, and manage budgets securely.
 
+## 🚀 Live Demo
+[FinancePal App](https://financepalfrontend-mu.vercel.app/)
+
 ## 🚀 Features
 - User authentication and secure login
 - Add, edit, and delete expenses
