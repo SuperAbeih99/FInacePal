@@ -10,6 +10,16 @@ const expenseRoutes = require("./routes/expenseRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const app = express();
+// Ensure DB is connected before handling requests (cached, so it's fast after first time)
+app.use(async (req, res, next) => {
+  try {
+    await connectDB(); // no re-connect thanks to cached connection in db.js
+    next();
+  } catch (err) {
+    console.error("DB connect middleware error:", err.message);
+    res.status(500).json({ message: "Database unavailable" });
+  }
+});
 
 // Database connection (cached for serverless)
 connectDB();
